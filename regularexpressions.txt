@@ -1,0 +1,36 @@
+numbers
+matches 44.944e111, negatives, thousands, 555,555,555
+
+^-?\d+(.|,)?\d+?(e|.)?\d+$
+or
+^-?\d+(,\d+)*(\.\d+(e\d+)?)?$
+
+remove ^ and $ for regex
+
+
+
+
+phone numbers
+
+gets stuff like 1 (444) 333 3333 or 1 (444) 333-3333
+
+1?[\s-]?\(?(\d{3})\)?[\s-]?\d+[\s-]?\d+
+1?[\s-]?\(?\d{3}?\)?[\d- ]+
+\(?\d{3}?\)?[\d- ]+
+
+symbols within
+[() -]
+
+
+email
+(\w+[.]?\w+)[@+]?\w+[@.+]?\w+.com
+
+html
+
+<([a-z])+(\s\w+='.*')?>(.*)</[a-z]+>
+
+images 
+^(\w+)\.(png|jpg|gif)$
+
+front whitespace remove
+^\s*(.*)$
