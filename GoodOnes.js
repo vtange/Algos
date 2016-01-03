@@ -43,6 +43,7 @@ var funct =function() vs function funct(){
 mutable vs immutable (strings)
 
 shift and pop
+	shift and pop RETURNS what is removed, but can acts as mutator action if just used w/o return
 
 slice vs splice
 	slice is variable, splice mutates like push.
