@@ -1,5 +1,3 @@
-//________________________________________________________________________________________________
-//try2
 
 function ranger(arr) {
 //make an array covering range of numbers. reduce it-
