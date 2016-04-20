@@ -1,6 +1,6 @@
 
 
-function factorialize(num) {
+function factorialize(num, stopAt) {
     // If the number is less than 0, reject it.
     if (num < 0) {
         return -1;
@@ -9,9 +9,10 @@ function factorialize(num) {
     else if (num === 0) {
         return 1;
     }
-	// set numfactorial as num, start decreasing num, multiplying with numfactorial as you go, until num
+    // set numfactorial as num, start decreasing num, multiplying with numfactorial as you go, until num
     var numfactorial = num;
-    while (num-- > 2) {
+    stopAt = stopAt&&stopAt<=num ? stopAt : 2;
+    while (num-- > stopAt) {
         numfactorial *= num;
     }
     return numfactorial;
