@@ -1,3 +1,7 @@
+/*-----------*/
+/* FROM PALACE GAME*/
+/*-----------*/
+
 //check if [1,1,1]
 Array.prototype.allValuesSame = function() {
 
@@ -20,4 +24,19 @@ Array.prototype.getFirstElementThat = function(test) {
 		}
     }
 	return null;
+}
+
+/*-----------*/
+/* FROM ALBUM LAND*/
+/*-----------*/
+
+Array.prototype.getFirstIndexThat = function(test) {
+
+    for(var i = 0; i < this.length; i++)
+    {
+        if (test(this[i])){
+            return i;
+        }
+    }
+    return null;
 }
