@@ -27,7 +27,7 @@ Array.prototype.getFirstElementThat = function(test) {
 }
 
 /*-----------*/
-/* FROM ALBUM LAND*/
+/* FROM ALBUM LAND && NOTES*/
 /*-----------*/
 
 Array.prototype.getFirstIndexThat = function(test) {
