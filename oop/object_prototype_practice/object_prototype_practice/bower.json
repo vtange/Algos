@@ -1,0 +1,25 @@
+{
+  "name": "OOPractice",
+  "version": "0.0.1",
+  "description": "Practice with JS classes, subclasses, and datastructures",
+  "main": "test/index.html",
+  "authors": [
+    "Victor Tang"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "underscore": "~1.6.0",
+    "chai": "~1.9.1",
+    "mocha": "~1.18.2"
+  },
+  "resolutions": {
+    "webcomponentsjs": "0.5.5"
+  }
+}
