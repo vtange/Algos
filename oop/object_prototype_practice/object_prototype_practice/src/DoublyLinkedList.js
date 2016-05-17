@@ -40,7 +40,7 @@ DoublyLinkedList.prototype.remove = function(name){
 
     if (prevNode) {
 		if(nextNode){
-			//prev, target, next
+			//prev, target, next (this is always the case if it's circular)
 			prevNode.next = nextNode;
 			nextNode.prev = prevNode;
 		}
