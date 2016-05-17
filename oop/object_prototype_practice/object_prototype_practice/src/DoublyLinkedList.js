@@ -16,23 +16,23 @@ DoublyLinkedList.prototype.add = function(name,value){
         var node = this.content[name] = new LinkedListNode(value);
 
         //start list
-        if (this._length === 0) {
-            this._head = node[name];
-            this._tail = node[name];
+        if (!this._head) {
+            this._head = node;
+            this._tail = node;
         }
 		else {
             //attach at the end
-            this._tail.next = node[name];
-            node[name].prev = this._tail;
-            this._tail = node[name];
+            this._tail.next = node;
+            node.prev = this._tail;
+            this._tail = node;
         }
 
 };
 
 DoublyLinkedList.prototype.remove = function(name){
 
-    var prevNode = this.content.name.prev;
-    var nextNode = this.content.name.next;
+    var prevNode = this.content[name].prev;
+    var nextNode = this.content[name].next;
 
     if (prevNode) {
 		if(nextNode){
@@ -58,5 +58,10 @@ DoublyLinkedList.prototype.remove = function(name){
 			this._tail = null;
 		}
 	}
-	delete this.content.name;
+	delete this.content[name];
+};
+
+DoublyLinkedList.prototype.get = function(name){
+
+	return this.content[name];
 };
