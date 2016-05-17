@@ -3,20 +3,26 @@ function StackElement(value) {
 }
 
 function Stack() {
-    this.content = [];
+    this.content = {};
+	this.length = 0;
 }
 
 Stack.prototype.add = function(value){
 	var card = new StackElement(value);
-	this.content.push(card);
+	this.length++;
+	this.content[this.length] = card;
 }
 
-Stack.prototype.peek = function(value){
-	var card = new StackElement(value);
-	return this.content[this.content.length-1];
+Stack.prototype.peek = function(){
+	return this.content[this.length];
 }
 
 Stack.prototype.draw = function(){
-	if(!this.content.length) return null;
-	return this.content.pop();
+	if(!this.length) return null;
+	else{
+		var card = {value:this.content[this.length].value};
+		delete this.content[this.length];
+		this.length--;
+		return card;
+	}
 }
