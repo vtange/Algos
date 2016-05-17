@@ -117,12 +117,31 @@ describe('Doubly Linked List', function() {
 		});
 		
 		it('can make circular where d points to a and vice versa, then break it', function() {
-			list.makeLoop();
+			list.toggleCircular();
 			expect(list.get('d').next.value).to.equal("this is value for 'a'");
 			expect(list.get('a').prev.value).to.equal("this is value for 'd'");
-			list.breakLoop();
+			list.toggleCircular();
 			expect(list.get('d').next).to.equal(null);
 			expect(list.get('a').prev).to.equal(null);
+		});
+		
+		it('circular d->a becomes e->a when e is added', function() {
+			list.toggleCircular();
+			expect(list.get('d').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'd'");
+			list.add('e',"this is value for 'e'");
+			expect(list.get('d').next.value).to.equal("this is value for 'e'");
+			expect(list.get('e').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'e'");
+		});
+
+		it('circular d->a becomes c->a when d is removed', function() {
+			list.toggleCircular();
+			expect(list.get('d').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'd'");
+			list.remove('d');
+			expect(list.get('c').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'c'");
 		});
 	});
 });

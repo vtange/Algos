@@ -5,6 +5,7 @@ function LinkedListNode(value) {
 }
 
 function DoublyLinkedList() {
+	this.circular = false;
     this.content = {};
     this._head = null; //first node
     this._tail = null; //last node
@@ -26,6 +27,9 @@ DoublyLinkedList.prototype.add = function(name,value){
             node.prev = this._tail;
             this._tail = node;
         }
+		if (this.circular) {
+			this.makeLoop();
+		}
 
 };
 
@@ -44,6 +48,7 @@ DoublyLinkedList.prototype.remove = function(name){
 			//prev, target
 			prevNode.next = null;
 			this._tail = prevNode;
+			console.log(this);
 		}
     }
 	else{
@@ -58,6 +63,9 @@ DoublyLinkedList.prototype.remove = function(name){
 			this._tail = null;
 		}
 	}
+	if (this.circular) {
+		this.makeLoop();
+	}
 	delete this.content[name];
 };
 
@@ -66,10 +74,26 @@ DoublyLinkedList.prototype.get = function(name){
 	return this.content[name];
 };
 
+DoublyLinkedList.prototype.toggleCircular = function(){
+	if(this.circular){
+		this.circular = false;
+		this.breakLoop();
+	}
+	else{
+		this.circular = true;
+		this.makeLoop();
+	}
+}
+
 DoublyLinkedList.prototype.makeLoop = function(){
 	if(this._head && this._tail){
+		console.log(this._head);
+		console.log(this._tail);
 		this._head.prev = this._tail;
 		this._tail.next = this._head;
+	}
+	else{
+		throw "tried to make a loop from nothing";
 	}
 };
 
@@ -77,5 +101,8 @@ DoublyLinkedList.prototype.breakLoop = function(){
 	if(this._head.prev && this._tail.next){
 		this._head.prev = null;
 		this._tail.next = null;
+	}
+	else{
+		throw "tried to break a loop that doesn't exist";
 	}
 };
