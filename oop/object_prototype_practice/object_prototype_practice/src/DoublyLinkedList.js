@@ -65,3 +65,17 @@ DoublyLinkedList.prototype.get = function(name){
 
 	return this.content[name];
 };
+
+DoublyLinkedList.prototype.makeLoop = function(){
+	if(this._head && this._tail){
+		this._head.prev = this._tail;
+		this._tail.next = this._head;
+	}
+};
+
+DoublyLinkedList.prototype.breakLoop = function(){
+	if(this._head.prev && this._tail.next){
+		this._head.prev = null;
+		this._tail.next = null;
+	}
+};

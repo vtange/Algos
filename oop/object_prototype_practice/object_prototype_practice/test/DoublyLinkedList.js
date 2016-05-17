@@ -32,6 +32,15 @@ describe('Doubly Linked List', function() {
 			list.remove('a');
 			expect(list.get('a')).to.equal(undefined);
 		});
+		
+		it('can make circular where a points to a and vice versa, then break it', function() {
+			list.makeLoop();
+			expect(list.get('a').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'a'");
+			list.breakLoop();
+			expect(list.get('a').next).to.equal(null);
+			expect(list.get('a').prev).to.equal(null);
+		});
 	});
 
 	describe('Adding and removing ({a,b})', function() {
@@ -59,6 +68,14 @@ describe('Doubly Linked List', function() {
 			list.remove('b');
 			expect(list.get('a').next).to.equal(null);
 			expect(list._tail.value).to.equal("this is value for 'a'");
+		});
+		it('can make circular where b points to a and vice versa, then break it', function() {
+			list.makeLoop();
+			expect(list.get('b').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'b'");
+			list.breakLoop();
+			expect(list.get('b').next).to.equal(null);
+			expect(list.get('a').prev).to.equal(null);
 		});
 	});
 
@@ -97,6 +114,15 @@ describe('Doubly Linked List', function() {
 		it('c points to d after removing b', function() {
 			list.remove('b');
 			expect(list.get('c').next.value).to.equal("this is value for 'd'");
+		});
+		
+		it('can make circular where d points to a and vice versa, then break it', function() {
+			list.makeLoop();
+			expect(list.get('d').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'd'");
+			list.breakLoop();
+			expect(list.get('d').next).to.equal(null);
+			expect(list.get('a').prev).to.equal(null);
 		});
 	});
 });
