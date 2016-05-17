@@ -48,7 +48,6 @@ DoublyLinkedList.prototype.remove = function(name){
 			//prev, target
 			prevNode.next = null;
 			this._tail = prevNode;
-			console.log(this);
 		}
     }
 	else{
@@ -62,9 +61,6 @@ DoublyLinkedList.prototype.remove = function(name){
 			this._head = null;
 			this._tail = null;
 		}
-	}
-	if (this.circular) {
-		this.makeLoop();
 	}
 	delete this.content[name];
 };
@@ -87,8 +83,6 @@ DoublyLinkedList.prototype.toggleCircular = function(){
 
 DoublyLinkedList.prototype.makeLoop = function(){
 	if(this._head && this._tail){
-		console.log(this._head);
-		console.log(this._tail);
 		this._head.prev = this._tail;
 		this._tail.next = this._head;
 	}

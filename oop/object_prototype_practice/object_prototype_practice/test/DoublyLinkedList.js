@@ -135,6 +135,15 @@ describe('Doubly Linked List', function() {
 			expect(list.get('a').prev.value).to.equal("this is value for 'e'");
 		});
 
+		it('circular d->a becomes d->b when a is removed', function() {
+			list.toggleCircular();
+			expect(list.get('d').next.value).to.equal("this is value for 'a'");
+			expect(list.get('a').prev.value).to.equal("this is value for 'd'");
+			list.remove('a');
+			expect(list.get('d').next.value).to.equal("this is value for 'b'");
+			expect(list.get('b').prev.value).to.equal("this is value for 'd'");
+		});
+		
 		it('circular d->a becomes c->a when d is removed', function() {
 			list.toggleCircular();
 			expect(list.get('d').next.value).to.equal("this is value for 'a'");
