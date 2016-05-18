@@ -1,13 +1,38 @@
 describe('Binary Heap', function() {
 
-	verifyClass(BinaryHeap).followsPattern('pseudoclassical', {}, false);
+	describe('Basic', function() {
 
-	beforeEach(function() {
-		heap = new BinaryHeap();
+		beforeEach(function() {
+			heap = new BinaryHeap();
+		});
+
+		it('should be empty from the start', function() {
+			expect(heap.content).to.deep.equal({});
+		});
+
+		it('you can add items', function() {
+			heap.add(5);
+			expect(heap.content[0].value).to.equal(5);
+		});
+
 	});
 
-	it('should be empty from the start', function() {
-		expect(heap.content).to.deep.equal([]);
+	describe('Heapifying', function() {
+
+		beforeEach(function() {
+			heap = new BinaryHeap(5);
+		});
+
+		it('should start with 5 as root', function() {
+			expect(heap.content[0].value).to.equal(5);
+		});
+
+		it('should not replace 5 if I add 6', function() {
+			heap.add(6);
+			expect(heap.content[0].value).to.equal(5);
+			expect(heap.content[1].value).to.equal(6);
+		});
+
 	});
 
 });
