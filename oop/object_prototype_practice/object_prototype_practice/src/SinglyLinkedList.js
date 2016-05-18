@@ -28,7 +28,7 @@ SinglyLinkedList.prototype.add = function(name,value){
 
 SinglyLinkedList.prototype.remove = function(name){
 	var target = this.content[name];
-	var prevNode = this.content.findPrev(function(node){
+	var prevNode = findPrev(this.content,function(node){
 		return node.next == target;
 	});
     var nextNode = this.content[name].next;
@@ -60,10 +60,10 @@ SinglyLinkedList.prototype.get = function(name){
 	return this.content[name];
 };
 
-Object.prototype.findPrev = function( test ) {
-    for( var prop in this ) {
-		if( this.hasOwnProperty(prop) && test(this[prop]) ){
-			return this[prop];
+function findPrev( obj, test ) {
+    for( var prop in obj ) {
+		if( obj.hasOwnProperty(prop) && test(obj[prop]) ){
+			return obj[prop];
 		}
     }
 };
