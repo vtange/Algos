@@ -15,31 +15,31 @@ function BinaryHeap(value){
 
 BinaryHeap.prototype.add = function(value){
 	var tree = this.content;
+	var hand = value;
 	//start at node 0;
 	var currBatch = [0];
 	var nextBatch = [];
 	
-	function runBatch(){
-		//start next batch
-		if(nextBatch.length>0){
-			currBatch = nextBatch;
-			nextBatch = [];
-		}
-		currBatch.forEach(function(num){
+	while(hand){
+		for(let i = 0; i<currBatch.length;i++){
+			//debug use
+			////console.log(hand + " -> " + currBatch[i]);
 			//min heap: root is smallest
-			if(!tree[num]){
-				tree[num] = new TreeNode(value);
+			if(!tree[currBatch[i]]){
+				tree[currBatch[i]] = new TreeNode(hand);
+				hand = null;
 				break;
 			}
 			else{
-				if(tree[num].value > value){
-					tree[num].value = value;
+				if(tree[currBatch[i]].value > hand){
+					tree[currBatch[i]].value = [hand, hand = tree[currBatch[i]].value][0];
 				}
 			}
 			//prepare next batch
-			nextBatch.push((2*num)+1)
-			nextBatch.push((2*num)+2)
-		});
+			nextBatch.push((2*currBatch[i])+1)
+			nextBatch.push((2*currBatch[i])+2)
+		};
+		currBatch = nextBatch;
 	}
 
 }
