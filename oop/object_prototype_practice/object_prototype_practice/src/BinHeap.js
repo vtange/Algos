@@ -19,7 +19,7 @@ BinaryHeap.prototype.add = function(value){
 	//start at node 0;
 	var currBatch = [0];
 	var nextBatch = [];
-	
+
 	while(hand){
 		for(let i = 0; i<currBatch.length;i++){
 			//debug use
@@ -41,9 +41,32 @@ BinaryHeap.prototype.add = function(value){
 		};
 		currBatch = nextBatch;
 	}
-
 }
 
-BinaryHeap.prototype.travel = function(payload){
+BinaryHeap.prototype.get = function(value){
+	var tree = this.content;
+	var hand = null;
+	//start at node 0;
+	var currBatch = [0];
+	var nextBatch = [];
 
+	while(!hand){
+		for(let i = 0; i<currBatch.length;i++){
+			//debug use
+			////console.log(hand + " -> " + currBatch[i]);
+			//min heap: root is smallest
+			if(!tree[currBatch[i]]){
+				break;
+			}
+			else{
+				if(tree[currBatch[i]].value === value){
+					return tree[currBatch[i]];
+				}
+			}
+			//prepare next batch
+			nextBatch.push((2*currBatch[i])+1)
+			nextBatch.push((2*currBatch[i])+2)
+		};
+		currBatch = nextBatch;
+	}	
 }
