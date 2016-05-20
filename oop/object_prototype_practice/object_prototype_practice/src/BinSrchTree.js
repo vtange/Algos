@@ -41,7 +41,7 @@ function BinarySearchTree() {
 
 BinarySearchTree.prototype = {
 
-    //restore constructor
+    //restore constructor (setting prototype = {} makes constructor = object)
     constructor: BinarySearchTree,
     
     //-------------------------------------------------------------------------
