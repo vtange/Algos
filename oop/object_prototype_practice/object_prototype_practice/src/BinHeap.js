@@ -5,11 +5,10 @@ function TreeNode(value){
 }
 
 function BinaryHeap(value){
-	this.content = {};
+	this.root = null;
 	if(value){
-		this.content[0] = new TreeNode(value);
+		this.root = new TreeNode(value);
 	}
-	this.root = this.content[0] || null;
 }
 
 /*-----*/
@@ -18,33 +17,9 @@ function BinaryHeap(value){
 
 BinaryHeap.prototype.add = function(value){
 	var tree = this.content;
-	var hand = value;
-	//start at node 0;
-	var currBatch = [0];
-	var nextBatch = [];
+	var addFn = addNode.bind(this,value);
 
-	while(hand){
-		for(let i = 0; i<currBatch.length;i++){
-			//debug use
-			////console.log(hand + " -> " + currBatch[i]);
-			//min heap: root is smallest
-			if(!tree[currBatch[i]]){
-				tree[currBatch[i]] = new TreeNode(hand);
-				hand = null;
-				break;
-			}
-			else{
-				if(tree[currBatch[i]].value > hand){
-					//swap current value of tree with one on hand
-					tree[currBatch[i]].value = [hand, hand = tree[currBatch[i]].value][0];
-				}
-			}
-			//prepare next batch
-			nextBatch.push((2*currBatch[i])+1);
-			nextBatch.push((2*currBatch[i])+2);
-		};
-		currBatch = nextBatch;
-	}
+	traverse(this.root,addFn);
 }
 
 BinaryHeap.prototype.get = function(value){
@@ -75,19 +50,57 @@ BinaryHeap.prototype.get = function(value){
 	}	
 }
 
+function addNode(){
+	var value = arguments[0];
+	var node = arguments[1];
+	if(!node){
+		node = new TreeNode(value);
+		this.root = node;
+		return true;
+	}
+	else if(!node.left){
+		node.left = new TreeNode(value);
+		return true;
+	}
+	else if(!node.right){
+		node.left = new TreeNode(value);
+		return true;
+	}
+	return false;
+}
+
+function breadCrumbs(node){
+	
+}
+
+function traverse(node,method){
+	var next = [node];
+
+	function processNode(node,fn){
+		//delete first element of next
+		if(next.length){
+			next.splice(0,1);	
+		}
+
+		//run operation, if true, stop. if false, append to next
+		//check if operation is finished
+		if(!fn(node)){
+			//prep next
+			if(node.left)
+				next.push(node.left);
+			if(node.right)
+				next.push(node.right);
+		}
+	}
+
+
+	processNode(this.content[0],method);
+	while(next.length){
+		processNode(next[0],method);
+	}
+}
+
+
 /*-----*/
 /* Depth First Search */
 /*-----*/
-
-function traverse(node,method);
-	var next = [];
-	
-;
-
-function processNode(node,[]){
-	[].push(node.value)
-	if(node.left)
-		next.push(node.left);
-	if(node.right)
-		next.push(node.right);
-}

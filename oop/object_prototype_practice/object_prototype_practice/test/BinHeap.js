@@ -7,12 +7,12 @@ describe('Binary Heap', function() {
 		});
 
 		it('should be empty from the start', function() {
-			expect(heap.content).to.deep.equal({});
+			expect(heap.root).to.equal(null);
 		});
 
 		it('you can add items', function() {
 			heap.add(5);
-			expect(heap.content[0].value).to.equal(5);
+			expect(heap.root.value).to.equal(5);
 		});
 
 	});
@@ -24,25 +24,25 @@ describe('Binary Heap', function() {
 		});
 
 		it('should start with 5 as root', function() {
-			expect(heap.content[0].value).to.equal(5);
+			expect(heap.root.value).to.equal(5);
 		});
 
 		it('should not replace 5 if I add 6', function() {
 			heap.add(6);
-			expect(heap.content[0].value).to.equal(5);
+			expect(heap.root.value).to.equal(5);
 			expect(heap.content[1].value).to.equal(6);
 		});
 
 		it('should replace 5 if I add 3', function() {
 			heap.add(3);
-			expect(heap.content[0].value).to.equal(3);
+			expect(heap.root.value).to.equal(3);
 			expect(heap.content[1].value).to.equal(5);
 		});
 		
 		it('should replace 5 if I add 3', function() {
 			heap.add(3);
 			heap.add(4);
-			expect(heap.content[0].value).to.equal(3);
+			expect(heap.root.value).to.equal(3);
 			expect(heap.content[1].value).to.equal(4);
 			expect(heap.content[2].value).to.equal(5);
 		});
@@ -66,7 +66,7 @@ describe('Binary Heap', function() {
 		});
 
 		it('should start with 50 as root', function() {
-			expect(heap.content[0].value).to.equal(50);
+			expect(heap.root.value).to.equal(50);
 		});
 
 		it('4255110 should be last', function() {
