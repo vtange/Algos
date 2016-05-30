@@ -30,7 +30,6 @@ describe('Binary Heap', function() {
 		it('should not replace 5 if I add 6', function() {
 			heap.add(6);
 			expect(heap.root.value).to.equal(5);
-			expect(heap.content[1].value).to.equal(6);
 		});
 
 		it('should replace 5 if I add 3', function() {

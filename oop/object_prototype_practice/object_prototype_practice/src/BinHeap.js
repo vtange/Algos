@@ -19,7 +19,7 @@ BinaryHeap.prototype.add = function(value){
 	var tree = this.content;
 	var addFn = addNode.bind(this,value);
 
-	traverse(this.root,addFn);
+	traverse.call(this,this.root,addFn);
 }
 
 BinaryHeap.prototype.get = function(value){
@@ -53,9 +53,8 @@ BinaryHeap.prototype.get = function(value){
 function addNode(){
 	var value = arguments[0];
 	var node = arguments[1];
-	if(!node){
-		node = new TreeNode(value);
-		this.root = node;
+	if(!this.root){
+		this.root = new TreeNode(value);
 		return true;
 	}
 	else if(!node.left){
@@ -81,7 +80,6 @@ function traverse(node,method){
 		if(next.length){
 			next.splice(0,1);	
 		}
-
 		//run operation, if true, stop. if false, append to next
 		//check if operation is finished
 		if(!fn(node)){
@@ -93,8 +91,7 @@ function traverse(node,method){
 		}
 	}
 
-
-	processNode(this.content[0],method);
+	processNode(this.root,method);
 	while(next.length){
 		processNode(next[0],method);
 	}
