@@ -1,24 +1,36 @@
 function exampleSort(arr,exampleArr){
 	var count = {};
-	var newArr = "";
+	var newArr = [];
 	arr.forEach(function(element){
 		if(!count.hasOwnProperty(element)){
-            count[element] = 1;
+            count[element] = [element];
         }
 		else{
-			count[element]++;
+			count[element].push(element);
 		}
 	});
 	exampleArr.forEach(function(element){
 		if(count.hasOwnProperty(element)){
-            newArr += Array(count[element]+1).join(element);
+           newArr = newArr.concat(count[element]);
         }
 	});
 	if(arr[0].constructor === Number){
-	    return newArr.split("").map(Number);
+	    return newArr.map(Number);
 	}
-	return newArr.split("");
+	return newArr;
 }
 var arr = [1,2,3,4,5,5,5,5];
 
 console.log(exampleSort(arr,[2,3,5,4,1]));
+
+
+Test.assertDeepEquals(exampleSort([1,2,3,4,5],[2,3,4,1,5]),[2,3,4,1,5]);
+Test.assertDeepEquals(exampleSort([1,2,3,3,3,4,5],[2,3,4,1,5]),[2,3,3,3,4,1,5]);
+Test.assertDeepEquals(exampleSort([1,2,3,3,3,5],[2,3,4,1,5]),[2,3,3,3,1,5]);
+Test.assertDeepEquals(exampleSort([1,2,3,3,3,5],[3,4,5,6,9,11,12,13,1,7,8,2,10]),[3,3,3,5,1,2]);
+Test.assertDeepEquals(exampleSort(["a","a","b","f","d","a"],["c","a","d","b","e","f"]),["a","a","a","d","b","f"]);
+Test.assertDeepEquals(exampleSort(["Alice","Bryan","Chad","Darrell","Ellie","Fiona"],["Alice","Bryan","Chad","Darrell","Ellie","Fiona"]),["Alice","Bryan","Chad","Darrell","Ellie","Fiona"]);
+
+var randomNumber = Test.randomNumber();
+
+Test.assertDeepEquals(exampleSort([randomNumber,1,4,randomNumber],[1,2,3,4,randomNumber]),[1,4,randomNumber,randomNumber]);
