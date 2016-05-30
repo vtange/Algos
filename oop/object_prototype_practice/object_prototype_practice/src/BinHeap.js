@@ -57,6 +57,11 @@ function addNode(){
 		this.root = new TreeNode(value);
 		return true;
 	}
+	else if(value < node.value){
+		node.value = [value, value = node.value][0];
+		this.add(value);
+		return true;
+	}
 	else if(!node.left){
 		node.left = new TreeNode(value);
 		return true;

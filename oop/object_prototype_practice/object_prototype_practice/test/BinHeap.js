@@ -35,15 +35,12 @@ describe('Binary Heap', function() {
 		it('should replace 5 if I add 3', function() {
 			heap.add(3);
 			expect(heap.root.value).to.equal(3);
-			expect(heap.content[1].value).to.equal(5);
 		});
 		
-		it('should replace 5 if I add 3', function() {
+		it('root should still be 3 if I add 4', function() {
 			heap.add(3);
 			heap.add(4);
 			expect(heap.root.value).to.equal(3);
-			expect(heap.content[1].value).to.equal(4);
-			expect(heap.content[2].value).to.equal(5);
 		});
 
 		it('you can get 5 after adding', function() {
