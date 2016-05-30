@@ -1,5 +1,5 @@
 function winChance(baseChance, numShots){
-    if(baseChance > 1){
+    if((baseChance^0) === baseChance){
         baseChance *= 0.01;
     }
     var loseChance = 1-baseChance;
