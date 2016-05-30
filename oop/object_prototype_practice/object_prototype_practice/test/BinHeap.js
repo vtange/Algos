@@ -52,21 +52,5 @@ describe('Binary Heap', function() {
 
 	describe('Big Heap', function() {
 
-		beforeEach(function() {
-			heap = new BinaryHeap(59);
-			heap.add(103);
-			heap.add(420);
-			heap.add(200);
-			heap.add(4255110);
-			heap.add(50);
-		});
-
-		it('should start with 50 as root', function() {
-			expect(heap.root.value).to.equal(50);
-		});
-
-		it('4255110 should be last', function() {
-			expect(heap.content[5].value).to.equal(4255110);
-		});
 	});
 });

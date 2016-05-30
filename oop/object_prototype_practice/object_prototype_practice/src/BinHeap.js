@@ -96,8 +96,8 @@ function traverse(node,method){
 
 	result = processNode(this.root,method);
 	while(next.length){
-		result = processNode(next[0],method);
-		console.log(result);
+		//don't overwrite result with falsey value
+		result = processNode(next[0],method) || result;
 	}
 	return result;
 }
