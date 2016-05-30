@@ -43,7 +43,7 @@ describe('Binary Heap', function() {
 			expect(heap.root.value).to.equal(3);
 		});
 
-		it('you can get 5 after adding', function() {
+		it('you can get 5 after adding 3 and 4', function() {
 			heap.add(3);
 			heap.add(4);
 			expect(heap.get(5).value).to.equal(5);
