@@ -33,19 +33,23 @@ function addNode(){
 	var value = arguments[0];
 	var node = arguments[1];
 	if(!this.root){
+		console.log("added "+value+" as root");
 		this.root = new TreeNode(value);
 		return true;
 	}
 	else if(value < node.value){
+		console.log("replaced "+node.value+" with "+value);
 		node.value = [value, value = node.value][0];
 		this.add(value);
 		return true;
 	}
 	else if(!node.left){
+		console.log("added "+value+" left of "+ node.value);
 		node.left = new TreeNode(value);
 		return true;
 	}
 	else if(!node.right){
+		console.log("added "+value+" right of "+ node.value);
 		node.right = new TreeNode(value);
 		return true;
 	}
@@ -71,26 +75,25 @@ function breadCrumbs(node){
 function traverse(node,method){
 	var next = [node];
 	var result;
-
+	
 	function processNode(node,fn){
 		//delete first element of next
 		if(next.length){
-			next.splice(0,1);	
+			next.splice(0,1);
 		}
 
-		//run operation, if true, stop. if false, append to next
-		var operation = fn(node);
-
-		//check if operation is finished
-		if(!operation){
+		//run fn if result is still falsey
+		if(!result){
+			result = fn(node);
+		}
+		
+		//check if we have a truthy return on the fn
+		if(!result){
 			//prep next
 			if(node.left)
 				next.push(node.left);
 			if(node.right)
 				next.push(node.right);
-		}
-		else{
-			return operation;
 		}
 	}
 

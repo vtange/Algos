@@ -52,5 +52,23 @@ describe('Binary Heap', function() {
 
 	describe('Big Heap', function() {
 
+		beforeEach(function() {
+			heap = new BinaryHeap();
+			heap.add(5);
+			heap.add(50);
+			heap.add(500);
+			heap.add(5000);
+			heap.add(50000);
+			heap.add(500000);
+			heap.add(5000000);
+			heap.add(50000000);
+		});
+
+		it('should have 5 as root', function() {
+			expect(heap.root.value).to.equal(5);
+		});
+		it('you can get 500k', function() {
+			expect(heap.get(500000).value).to.equal(500000);
+		});
 	});
 });
