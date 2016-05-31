@@ -36,12 +36,6 @@ BinaryHeap.prototype.record = function(arr){
 	return bfs.call(this,this.root,recFn);
 }
 
-BinaryHeap.prototype.recorddfs = function(arr){
-	var recFn = breadCrumbs.bind(this,arr);
-
-	return dfs.call(this,this.root,recFn);
-}
-
 function addNode(){
 	var value = arguments[0];
 	var node = arguments[1];
@@ -148,6 +142,24 @@ function bfs(node,method){
 /*-----*/
 /* Depth First Search */
 /*-----*/
+
+BinaryHeap.prototype.recorddfs = function(arr){
+	var recFn = deadCrumbs.bind(this,arr);
+
+	return dfs.call(this,this.root,recFn);
+}
+
+function deadCrumbs(){
+	var arr = arguments[0];
+	var node = arguments[1];
+	if(node){
+		arr.push(node.value);
+	}
+	else{
+		return arr;
+	}
+	return false;
+}
 
 function dfs(node,method){
 	var next = [node];
