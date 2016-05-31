@@ -21,21 +21,26 @@ BinaryHeap.prototype.add = function(value){
 		this.root = new TreeNode(value);
 		return true;
 	}
-	return traverse.call(this,this.root,addFn);
+	return bfs.call(this,this.root,addFn);
 }
 
 BinaryHeap.prototype.get = function(value){
 	var getFn = getNode.bind(this,value);
 
-	return traverse.call(this,this.root,getFn);
+	return bfs.call(this,this.root,getFn);
 }
 
 BinaryHeap.prototype.record = function(arr){
 	var recFn = breadCrumbs.bind(this,arr);
 
-	return traverse.call(this,this.root,recFn);
+	return bfs.call(this,this.root,recFn);
 }
 
+BinaryHeap.prototype.recorddfs = function(arr){
+	var recFn = breadCrumbs.bind(this,arr);
+
+	return dfs.call(this,this.root,recFn);
+}
 
 function addNode(){
 	var value = arguments[0];
@@ -102,7 +107,7 @@ function breadCrumbs(){
 	return false;
 }
 
-function traverse(node,method){
+function bfs(node,method){
 	var next = [node];
 	var result;
 
@@ -143,3 +148,40 @@ function traverse(node,method){
 /*-----*/
 /* Depth First Search */
 /*-----*/
+
+function dfs(node,method){
+	var next = [node];
+	var result;
+
+	function processNode(node,fn){
+		//delete first element of next
+		if(next.length){
+			next.splice(0,1);
+		}
+
+		//run fn if result is still falsey
+		if(!result){
+			result = fn(node);
+		}
+
+		//check if we have a truthy return on the fn
+		if(!result){
+			//prep next
+			if(node.left)
+				next.splice(0,0,node.left);
+			if(node.right)
+				next.splice(1,0,node.right);
+			if(!next.length){
+				//run fn with no node, ends functions like breadCrumbs.
+				result = fn();
+			}
+		}
+	}(this.root,method);
+	//^ immediate invoke with root and method
+	
+	while(next.length){
+		//don't overwrite result with falsey value
+		result = processNode(next[0],method) || result;
+	}
+	return result;
+}

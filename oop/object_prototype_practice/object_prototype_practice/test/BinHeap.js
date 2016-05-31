@@ -78,5 +78,8 @@ describe('Binary Heap', function() {
 		it('you can get an array of BFS travelled values', function() {
 			expect(heap.record([]).length).to.equal(13);
 		});
+		it('you can get an array of BFS travelled values', function() {
+			console.log(heap.recorddfs([]));
+		});
 	});
 });
