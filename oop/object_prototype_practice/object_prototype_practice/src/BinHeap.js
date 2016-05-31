@@ -33,7 +33,7 @@ BinaryHeap.prototype.get = function(value){
 BinaryHeap.prototype.record = function(arr){
 	var recFn = breadCrumbs.bind(this,arr);
 
-	console.log(traverse.call(this,this.root,recFn));
+	return traverse.call(this,this.root,recFn);
 }
 
 
@@ -42,23 +42,23 @@ function addNode(){
 	var node = arguments[1];
 	if(node){
 		if(!this.root){
-			console.log("added "+value+" as root");
+			//console.log("added "+value+" as root");
 			this.root = new TreeNode(value);
 			return true;
 		}
 		else if(value < node.value){
-			console.log("replaced "+node.value+" with "+value);
+			//console.log("replaced "+node.value+" with "+value);
 			node.value = [value, value = node.value][0];
 			this.add(value);
 			return true;
 		}
 		else if(!node.left){
-			console.log("added "+value+" left of "+ node.value);
+			//console.log("added "+value+" left of "+ node.value);
 			node.left = new TreeNode(value);
 			return true;
 		}
 		else if(!node.right){
-			console.log("added "+value+" right of "+ node.value);
+			//console.log("added "+value+" right of "+ node.value);
 			node.right = new TreeNode(value);
 			return true;
 		}
@@ -95,7 +95,6 @@ function breadCrumbs(){
 			arr.push(node.left.value);
 		if(node.right)
 			arr.push(node.right.value);
-		console.log(arr);
 	}
 	else{
 		return arr;
