@@ -52,7 +52,7 @@ describe('Binary Heap', function() {
 
 	describe('Big Heap', function() {
 
-		beforeEach(function() {
+		before(function() {
 			heap = new BinaryHeap();
 			heap.add(5);
 			heap.add(50);
@@ -62,6 +62,11 @@ describe('Binary Heap', function() {
 			heap.add(500000);
 			heap.add(5000000);
 			heap.add(50000000);
+			heap.add(1000000);
+			heap.add(100000);
+			heap.add(10000);
+			heap.add(1000);
+			heap.add(100);
 		});
 
 		it('should have 5 as root', function() {
