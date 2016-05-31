@@ -73,27 +73,31 @@ function getNode(){
 function breadCrumbs(){
 	var arr = arguments[0];
 	var node = arguments[1];
-
+	var isLast = arguments[2];
 	arr.push(node.value);
-
+	console.log(arr);
+	if(isLast){
+		return arr;
+	}
 	return false;
 }
 
 function traverse(node,method){
 	var next = [node];
-	var result;
-	
+	var result, isLast;
+
 	function processNode(node,fn){
 		//delete first element of next
 		if(next.length){
 			next.splice(0,1);
+			isLast = !(next.length);
 		}
 
 		//run fn if result is still falsey
 		if(!result){
-			result = fn(node);
+			result = fn(node,isLast);
 		}
-		
+
 		//check if we have a truthy return on the fn
 		if(!result){
 			//prep next
@@ -101,6 +105,7 @@ function traverse(node,method){
 				next.push(node.left);
 			if(node.right)
 				next.push(node.right);
+			console.log(next);
 		}
 	}
 
