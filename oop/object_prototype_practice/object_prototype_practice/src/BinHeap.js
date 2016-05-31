@@ -16,18 +16,23 @@ function BinaryHeap(value){
 /*-----*/
 
 BinaryHeap.prototype.add = function(value){
-	var tree = this.content;
 	var addFn = addNode.bind(this,value);
 
 	return traverse.call(this,this.root,addFn);
 }
 
 BinaryHeap.prototype.get = function(value){
-	var tree = this.content;
 	var getFn = getNode.bind(this,value);
 
 	return traverse.call(this,this.root,getFn);
 }
+
+BinaryHeap.prototype.record = function(arr){
+	var recFn = breadCrumbs.bind(this,arr);
+
+	console.log(traverse.call(this,this.root,recFn));
+}
+
 
 function addNode(){
 	var value = arguments[0];
@@ -62,14 +67,16 @@ function getNode(){
 	if(node.value === value){
 		return node;
 	}
-	if(!node){
-		return "No Node Found";
-	}
 	return false;
 }
 
-function breadCrumbs(node){
-	
+function breadCrumbs(){
+	var arr = arguments[0];
+	var node = arguments[1];
+
+	arr.push(node.value);
+
+	return false;
 }
 
 function traverse(node,method){

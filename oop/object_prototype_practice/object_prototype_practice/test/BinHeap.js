@@ -75,5 +75,8 @@ describe('Binary Heap', function() {
 		it('you can get 500k', function() {
 			expect(heap.get(500000).value).to.equal(500000);
 		});
+		it('you can get an array of BFS travelled values', function() {
+			heap.record([]);
+		});
 	});
 });
