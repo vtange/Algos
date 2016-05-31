@@ -17,7 +17,10 @@ function BinaryHeap(value){
 
 BinaryHeap.prototype.add = function(value){
 	var addFn = addNode.bind(this,value);
-
+	if(!this.root){
+		this.root = new TreeNode(value);
+		return true;
+	}
 	return traverse.call(this,this.root,addFn);
 }
 
@@ -37,26 +40,28 @@ BinaryHeap.prototype.record = function(arr){
 function addNode(){
 	var value = arguments[0];
 	var node = arguments[1];
-	if(!this.root){
-		console.log("added "+value+" as root");
-		this.root = new TreeNode(value);
-		return true;
-	}
-	else if(value < node.value){
-		console.log("replaced "+node.value+" with "+value);
-		node.value = [value, value = node.value][0];
-		this.add(value);
-		return true;
-	}
-	else if(!node.left){
-		console.log("added "+value+" left of "+ node.value);
-		node.left = new TreeNode(value);
-		return true;
-	}
-	else if(!node.right){
-		console.log("added "+value+" right of "+ node.value);
-		node.right = new TreeNode(value);
-		return true;
+	if(node){
+		if(!this.root){
+			console.log("added "+value+" as root");
+			this.root = new TreeNode(value);
+			return true;
+		}
+		else if(value < node.value){
+			console.log("replaced "+node.value+" with "+value);
+			node.value = [value, value = node.value][0];
+			this.add(value);
+			return true;
+		}
+		else if(!node.left){
+			console.log("added "+value+" left of "+ node.value);
+			node.left = new TreeNode(value);
+			return true;
+		}
+		else if(!node.right){
+			console.log("added "+value+" right of "+ node.value);
+			node.right = new TreeNode(value);
+			return true;
+		}
 	}
 	return false;
 }
@@ -64,17 +69,18 @@ function addNode(){
 function getNode(){
 	var value = arguments[0];
 	var node = arguments[1];
-	
-	if(node.value === value){
-		return node;
-	}
-	if(node.left){
-		if(node.left.value === value)
-		return node.left;
-	}
-	if(node.right){
-		if(node.right.value === value)
-		return node.right;
+	if(node){
+		if(node.value === value){
+			return node;
+		}
+		if(node.left){
+			if(node.left.value === value)
+			return node.left;
+		}
+		if(node.right){
+			if(node.right.value === value)
+			return node.right;
+		}
 	}
 	return false;
 }
@@ -82,13 +88,18 @@ function getNode(){
 function breadCrumbs(){
 	var arr = arguments[0];
 	var node = arguments[1];
-	if(this.root===node)
-		arr.push(this.root.value);
-	if(node.left)
-		arr.push(node.left.value);
-	if(node.right)
-		arr.push(node.right.value);
-	console.log(arr);
+	if(node){
+		if(this.root===node)
+			arr.push(this.root.value);
+		if(node.left)
+			arr.push(node.left.value);
+		if(node.right)
+			arr.push(node.right.value);
+		console.log(arr);
+	}
+	else{
+		return arr;
+	}
 	return false;
 }
 
@@ -114,6 +125,10 @@ function traverse(node,method){
 				next.push(node.left);
 			if(node.right)
 				next.push(node.right);
+			if(!next.length){
+				//run fn with no node, ends functions like breadCrumbs.
+				result = fn();
+			}
 		}
 	}(this.root,method);
 	//^ immediate invoke with root and method
