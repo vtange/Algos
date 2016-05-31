@@ -64,8 +64,17 @@ function addNode(){
 function getNode(){
 	var value = arguments[0];
 	var node = arguments[1];
+	
 	if(node.value === value){
 		return node;
+	}
+	if(node.left){
+		if(node.left.value === value)
+		return node.left;
+	}
+	if(node.right){
+		if(node.right.value === value)
+		return node.right;
 	}
 	return false;
 }
@@ -73,9 +82,8 @@ function getNode(){
 function breadCrumbs(){
 	var arr = arguments[0];
 	var node = arguments[1];
-	if(this.root===node){
+	if(this.root===node)
 		arr.push(this.root.value);
-	}
 	if(node.left)
 		arr.push(node.left.value);
 	if(node.right)
@@ -106,11 +114,10 @@ function traverse(node,method){
 				next.push(node.left);
 			if(node.right)
 				next.push(node.right);
-			console.log(next);
 		}
-	}
-
-	result = processNode(this.root,method);
+	}(this.root,method);
+	//^ immediate invoke with root and method
+	
 	while(next.length){
 		//don't overwrite result with falsey value
 		result = processNode(next[0],method) || result;
