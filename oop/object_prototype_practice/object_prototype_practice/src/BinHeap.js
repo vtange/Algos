@@ -184,7 +184,7 @@ function dfs(node,method){
 			if(node.right)
 				next.splice(1,0,node.right);
 			if(!next.length){
-				//run fn with no node, ends functions like breadCrumbs.
+				//run fn with no node, ends functions like deadCrumbs.
 				result = fn();
 			}
 		}
