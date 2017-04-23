@@ -1,0 +1,12 @@
+//hidden markov model
+//observe state depends on what 's' transition returns.
+
+var transition = function(s) {
+  return s ? flip(0.7) : flip(0.3)
+}
+
+var observeState = function(s) {
+  return s ? flip(0.9) : flip(0.1)
+}
+
+observeState(transition(true))
