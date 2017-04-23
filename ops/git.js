@@ -52,20 +52,3 @@ git status
 
 git rm -r --cache .
 	clear added files
-
-/*--------------*/
-/*  HOW TO HEROKU  */
-/*--------------*/
-/*
-
-heroku create
-
-heroku apps:rename
-
-heroku logs
-
-heroku apps:destroy
-
-
-
-*/

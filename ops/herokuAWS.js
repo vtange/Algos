@@ -3,6 +3,14 @@
 /*--------------*/
 /*
 
+heroku login
+	resolves invalid credentials
+
+heroku keys
+	show ssh keys
+	:add
+	adds new key
+
 heroku create <name>
 	create a new app
 
