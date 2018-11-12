@@ -1,0 +1,8 @@
+//http://webppl.org/
+
+var makeCoin = function(weight) { return function() { return flip(weight) } }
+var coin = makeCoin(0.8)
+
+var dist = Infer({method: 'forward', samples: 1000}, function() { sum(repeat(10, coin)) })
+
+viz.auto(dist);

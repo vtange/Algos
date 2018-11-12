@@ -1,0 +1,16 @@
+/*
+The probability of breast cancer is 1% for a woman at 40 who participates in a routine screening. If a woman has breast cancer, the probability is 80% that she will have a positive mammography. If a woman does not have breast cancer, the probability is 9.6% that she will also have a positive mammography. A woman in this age group had a positive mammography in a routine screening. What is the probability that she actually has breast cancer?
+
+*/
+
+var cancerDist = Infer({method: 'enumerate'},
+  function () {
+    var breastCancer = flip(0.01) //1%
+    var positiveMammogram = breastCancer ? flip(0.8) : flip(0.096) // 80% if breastCancer, 9.6% if not
+    condition(positiveMammogram)
+    return {breastCancer: breastCancer}
+})
+viz(cancerDist)
+
+//IN: variables, %
+//OUT: probability of one of the variables being....___
