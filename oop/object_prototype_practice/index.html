@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="bower_components/mocha/mocha.css">
+
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="bower_components/mocha/mocha.js"></script>
+    <script src="bower_components/chai/chai.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+      mocha.setup({
+        'ui': 'bdd',
+        'bail': true
+      });
+    </script>
+    <script>window.expect = chai.expect</script>
+
+    <!-- source files -->
+    <script type="text/javascript" src="src/SinglyLinkedList.js"></script>
+    <script type="text/javascript" src="src/DoublyLinkedList.js"></script>
+    <script type="text/javascript" src="src/Stack.js"></script>
+    <script type="text/javascript" src="src/Queue.js"></script>
+    <script type="text/javascript" src="src/BinHeap.js"></script>
+
+
+    <!-- spec files -->
+    <script type="text/javascript" src="test/verifyClass.js"></script>
+    <script type="text/javascript" src="test/SinglyLinkedList.js"></script>
+    <script type="text/javascript" src="test/DoublyLinkedList.js"></script>
+    <script type="text/javascript" src="test/Stack.js"></script>
+    <script type="text/javascript" src="test/Queue.js"></script>
+    <script type="text/javascript" src="test/BinHeap.js"></script>
+
+
+    <script>
+
+      $(function() {
+        window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+      });
+    </script>
+  </body>
+</html>

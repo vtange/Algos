@@ -7,12 +7,12 @@ function Queue() {
 }
 
 Queue.prototype.add = function(value){
-	var card = new StackElement(value);
+	var card = new QueueElement(value);
 	this.content.unshift(card);
 }
 
 Queue.prototype.peek = function(value){
-	var card = new StackElement(value);
+	var card = new QueueElement(value);
 	return this.content[0];
 }
 

@@ -1,0 +1,25 @@
+function Person(name){
+    this.name = name;
+}
+
+var john = new Person("John");
+
+function Boy(){
+}
+
+var boy = new Boy();
+
+console.log(Object.getPrototypeOf(boy));
+
+function hello(){
+    console.log('hello');
+}
+
+hello.call(null);
+hello.apply(null);
+var basichello = hello.bind(null);
+basichello();
+
+
+var t = new Array;
+console.log(t.__proto__);
