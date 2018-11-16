@@ -1,9 +1,3 @@
-function TreeNode(value){
-	this.value = value;
-	this.left = null;
-	this.right = null;
-}
-
 function BinaryHeap(value){
 	this.root = null;
 	if(value){
@@ -130,7 +124,7 @@ function bfs(node,method){
 		}
 	}(this.root,method);
 	//^ immediate invoke with root and method
-	
+
 	while(next.length){
 		//don't overwrite result with falsey value
 		result = processNode(next[0],method) || result;
@@ -190,7 +184,7 @@ function dfs(node,method){
 		}
 	}(this.root,method);
 	//^ immediate invoke with root and method
-	
+
 	while(next.length){
 		//don't overwrite result with falsey value
 		result = processNode(next[0],method) || result;

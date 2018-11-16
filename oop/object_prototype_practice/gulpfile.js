@@ -11,7 +11,8 @@ gulp.task('default', function () {
             baseDir: "./"
         }
     });
-	gulp.watch("./src/*.js", "./test/*.js", ['sync']);
+    gulp.watch("src/*.js", ['sync']);
+    gulp.watch("test/*.js", ['sync']);
 });
 
 gulp.task('sync', function() {
