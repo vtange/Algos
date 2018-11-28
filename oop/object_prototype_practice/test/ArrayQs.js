@@ -93,5 +93,12 @@ describe('Array Questions', function() {
 			expect(largestNonAdjacentSum([5, 1, 1, 5])).to.equal(10);
 		});
 
+		it('in [5, 1, 1, 5, 1] out 10', function() {
+			expect(largestNonAdjacentSum([5, 1, 1, 5, 1])).to.equal(10);
+		});
+
+		it('in [5, 1, 5, 5, 1] out 11', function() {
+			expect(largestNonAdjacentSum([5, 1, 5, 5, 1])).to.equal(11);
+		});
 	});
 });
