@@ -112,3 +112,20 @@ function arrFirstMissingPosIntUsingSet(arrInts)
     }
     return returnVal;
 }
+
+function largestNonAdjacentSum(arrInts)
+{
+    var max_excluding_last = Math.max(0, arrInts[0]) || 0;
+    var max_including_last = Math.max(max_excluding_last, arrInts[1]) || 0;
+    var prev_max_including_last;
+
+    for (var i=2;i<arrInts.length;i++)
+    {
+        prev_max_including_last = max_including_last;
+
+        max_including_last = Math.max(max_including_last, max_excluding_last + arrInts[i])
+        max_excluding_last = prev_max_including_last
+    }
+
+    return Math.max(max_including_last, max_excluding_last)
+}

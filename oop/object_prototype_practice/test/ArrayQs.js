@@ -58,7 +58,7 @@ describe('Array Questions', function() {
 			expect(arrFirstMissingPosInt([1, 2, 0])).to.equal(3);
 		});
 
-        describe('set', function() {
+        describe('using sets', function() {
 
 			it('in [3, 4, -1, 1] out 2', function() {
 				expect(arrFirstMissingPosIntUsingSet([3, 4, -1, 1])).to.equal(2);
@@ -71,4 +71,27 @@ describe('Array Questions', function() {
         });
 	});
 
+	describe('largestNonAdjacentSum', function() {
+
+		it('in [] out 2', function() {
+			expect(largestNonAdjacentSum([])).to.equal(0);
+		});
+
+		it('in [2] out 2', function() {
+			expect(largestNonAdjacentSum([2])).to.equal(2);
+		});
+
+		it('in [2, 4] out 4', function() {
+			expect(largestNonAdjacentSum([2, 4])).to.equal(4);
+		});
+
+		it('in [2, 4, 6, 2, 5] out 13', function() {
+			expect(largestNonAdjacentSum([2, 4, 6, 2, 5])).to.equal(13);
+		});
+
+		it('in [5, 1, 1, 5] out 10', function() {
+			expect(largestNonAdjacentSum([5, 1, 1, 5])).to.equal(10);
+		});
+
+	});
 });
