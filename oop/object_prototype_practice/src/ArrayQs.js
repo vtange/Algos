@@ -130,3 +130,37 @@ function largestNonAdjacentSum(arrInts)
 
     return Math.max(max_including_last, max_excluding_last)
 }
+
+function max_overlapping(arrIntervals)
+{
+    var starts = arrIntervals.map(function(a){return a[0];}).sort(function(a,b){return a > b;});
+    var ends = arrIntervals.map(function(a){return a[1];}).sort(function(a,b){return a > b;});
+
+    var classrooms = 0;
+    var startIdx = 0;
+    var endIdx = 0;
+    nextEnd = ends[endIdx];
+    nextStart = starts[startIdx];
+    while(nextStart != undefined)
+    {
+        if(nextStart < nextEnd)
+        {
+            //if a class started before another finishes, add a room
+            classrooms++;
+
+            //check next class next
+            startIdx++;
+            nextStart = starts[startIdx];
+        }
+        else
+        {
+            //a class ended, free a room
+            classrooms--;
+
+            //check next class that ends
+            endIdx++;
+            nextEnd = ends[endIdx];
+        }
+    }
+    return classrooms;
+}

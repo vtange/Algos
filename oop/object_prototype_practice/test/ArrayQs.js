@@ -101,4 +101,40 @@ describe('Array Questions', function() {
 			expect(largestNonAdjacentSum([5, 1, 5, 5, 1])).to.equal(11);
 		});
 	});
+
+
+	describe('max_overlapping', function() {
+
+		it('in [] out 0', function() {
+			expect(max_overlapping([])).to.equal(0);
+		});
+
+		it('in [[]] out 0', function() {
+			expect(max_overlapping([[]])).to.equal(0);
+		});
+
+		it('in [0, 12] out 1', function() {
+			expect(max_overlapping([[0, 12]])).to.equal(1);
+		});
+
+		it('in [[30, 75], [0, 50], [60, 150]] out 2', function() {
+			expect(max_overlapping([[30, 75], [0, 50], [60, 150]])).to.equal(2);
+		});
+
+		it('in [[30, 75], [0, 50], [0, 150]] out 3', function() {
+			expect(max_overlapping([[30, 75], [0, 50], [0, 150]])).to.equal(3);
+		});
+
+		it('in [0,100],[100,200] out 1', function() {
+			expect(max_overlapping([[0,100],[100,200]])).to.equal(1);
+		});
+
+		it('in [0,100],[0,100] out 2', function() {
+			expect(max_overlapping([[0,100],[0,100]])).to.equal(2);
+		});
+
+		it('in [5, 1, 5, 5, 1] out 11', function() {
+			expect(max_overlapping([[0, 75], [110, 150], [11110, 111150]])).to.equal(1);
+		});
+	});
 });
