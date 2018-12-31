@@ -19,6 +19,27 @@ function exampleSort(arr,exampleArr){
 	}
 	return newArr;
 }
+
+//ON^2
+function exampleSort(arr, exampleArr){
+	arr.sort( (x,y) => exampleArr.indexOf(x) - exampleArr.indexOf(y) );
+	return arr;
+}
+
+//use space to reduce time ^
+function exampleSort(arr, exampleArr){
+	var seen = Object.create(null);
+	for(var i=0;i<exampleArr.length;i++)
+	{
+		if(!seen[exampleArr[i]])
+		{
+			//save first index we see for this array
+			seen[exampleArr[i]] = i;
+		}
+	}
+	return arr.sort( (x,y) => seen[x] - seen[y] );
+}
+
 var arr = [1,2,3,4,5,5,5,5];
 
 console.log(exampleSort(arr,[2,3,5,4,1]));

@@ -164,3 +164,35 @@ function max_overlapping(arrIntervals)
     }
     return classrooms;
 }
+
+var a = Array.apply(null, Array(Math.floor(Math.random()*50)+100)).map(String.prototype.valueOf,"_");
+
+function getRandFromArrayUnknownLength(arr)
+{
+    var i = 0, returnVal = 0;
+    while(arr[i])
+    {
+        if(Math.random() <= 1/(i+1))
+        {
+            returnVal = i;
+        }
+        i++;
+    }
+    return returnVal;
+}
+
+
+function getRand(arr, num)
+{
+    var i = 0, returnVal = [];
+    while(arr[i])
+    {
+        if(Math.random() <= num/(i+1))
+        {
+            returnVal.push(i);
+            if(returnVal.length > num) returnVal.splice(Math.floor(Math.random()*num),1);
+        }
+        i++;
+    }
+    return returnVal;
+}
