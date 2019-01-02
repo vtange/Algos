@@ -17,7 +17,7 @@ describe('Binary Heap', function() {
 
 	});
 
-	describe('Orders things highest leftwards, highest rightwards', function() {
+	describe('Max Heap', function() {
 
 		before(function() {
 			tree = new BinaryHeap();
@@ -50,6 +50,43 @@ describe('Binary Heap', function() {
 			tree.insert(200);
 			expect(tree._root.right.value).to.equal(200);
 			expect(tree._root.right.left.value).to.equal(122);
+		});
+	});
+
+	describe('Min Heap', function() {
+
+		before(function() {
+			tree = new BinaryHeap();
+			tree.maxHeap = false;
+			tree.insert(12);
+			tree.insert(122);
+		});
+
+		it('maxHeap property should be default true', function() {
+			expect(tree.maxHeap).to.equal(false);
+		});
+		it('root should be 12', function() {
+			expect(tree._root.value).to.equal(12);
+		});
+		it('root left should be 122', function() {
+			expect(tree._root.left.value).to.equal(122);
+		});
+		it('root should be 1 after inserting 1', function() {
+			tree.insert(1);
+			expect(tree._root.value).to.equal(1);
+		});
+		it('6 should displace 12', function() {
+			tree.insert(6);
+			expect(tree._root.left.value).to.equal(6);
+		});
+		it('7 should be child of 6', function() {
+			tree.insert(7);
+			expect(tree._root.left.right.value).to.equal(7);
+		});
+		it('200 should pass 12 and be left child of 12', function() {
+			tree.insert(200);
+			expect(tree._root.right.value).to.equal(12);
+			expect(tree._root.right.left.value).to.equal(200);
 		});
 	});
 

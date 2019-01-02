@@ -40,7 +40,7 @@ BinaryHeap.prototype.insert = function(value)
     }
 
     //bubble up
-    while(ptrParent && ptrNode.value > ptrParent.value)
+    while(ptrParent && this.comparator(ptrNode.value, ptrParent.value))
     {
         tempValueHolder = ptrNode.value;
         ptrNode.value = ptrParent.value;
@@ -50,6 +50,10 @@ BinaryHeap.prototype.insert = function(value)
     }
 }
 
+BinaryHeap.prototype.remove = function(value)
+{
+    var ptrNode, ptrParent, tempValueHolder;
+}
 
 //basic bfs that goes down a tree level-by-level like a step-pyramid using a queue
 BinaryHeap.prototype.bfs = function(fnEvaluator)
@@ -112,4 +116,14 @@ BinaryHeap.prototype.dfs = function(fnEvaluator)
             }
         }
     }
+}
+
+//used to sort newly added values and heapify tree
+BinaryHeap.prototype.comparator = function(newNodeValue, parentNodeValue)
+{
+    if(this.maxHeap)
+    {
+        return newNodeValue > parentNodeValue;
+    }
+    return newNodeValue < parentNodeValue;
 }
