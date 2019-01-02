@@ -213,7 +213,7 @@ BinarySearchTree.prototype = {
                             replacement = replacement.right;
                         }
 
-                        if (replacementParent) {
+                        if (!replacementParent) {
 
                             //case if we default just used left node
                             replacement.right = this._root.right;
