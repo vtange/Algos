@@ -133,8 +133,8 @@ function largestNonAdjacentSum(arrInts)
 
 function max_overlapping(arrIntervals)
 {
-    var starts = arrIntervals.map(function(a){return a[0];}).sort(function(a,b){return a > b;});
-    var ends = arrIntervals.map(function(a){return a[1];}).sort(function(a,b){return a > b;});
+    var starts = arrIntervals.map(function(a){return a[0];}).sort(function(a,b){return a - b;});
+    var ends = arrIntervals.map(function(a){return a[1];}).sort(function(a,b){return a - b;});
 
     var classrooms = 0;
     var startIdx = 0;
@@ -181,7 +181,7 @@ function getRandFromArrayUnknownLength(arr)
     return returnVal;
 }
 
-
+//multiple randoms (used in civ4 resource randomizer)
 function getRand(arr, num)
 {
     var i = 0, returnVal = [];
