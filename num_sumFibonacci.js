@@ -36,3 +36,24 @@ function getFib(n) {
 		return getFib(n-1)+getFib(n-2);
 	}
 }
+
+//________________________________________________________________________________________________
+
+function getFibCached(n) {
+    var cache = [];
+    function getFib(n){
+        if(!cache[n])
+        {
+            if(n<2)
+            {
+                cache[n] = n;
+            }
+            else
+            {
+                cache[n] = getFib(n-1) + getFib(n-2);
+            }
+        }
+        return cache[n];
+    }
+    return getFib(n);
+}
