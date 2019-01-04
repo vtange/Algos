@@ -57,3 +57,14 @@ function getFibCached(n) {
     }
     return getFib(n);
 }
+
+function getFibCachedNoRecursion() {
+    var cache = [0,1];
+    return function (n){
+        for(var i = 2; i <= n; i++)
+        {
+            cache[i] = cache[i] || cache[i-1] + cache[i-2];
+        }
+        return cache[n];
+    };
+}
