@@ -131,6 +131,26 @@ function largestNonAdjacentSum(arrInts)
     return Math.max(max_including_last, max_excluding_last)
 }
 
+//much easier to read than ^. for the same input //[5,1,2,5,1] oddMax basically wins
+function largestNonAdjacentSumAlt(num) {
+    var prevEvenMax = 0;
+    var prevOddMax = 0;
+
+    if(Array.isArray(num))
+    {
+        for (var i = 0; i < num.length; i++) {
+            if (i % 2 === 0) {
+                prevEvenMax = Math.max(prevEvenMax + num[i], prevOddMax);
+            }
+            else {
+                prevOddMax = Math.max(prevOddMax + num[i], prevEvenMax);
+            }
+        }
+    }
+
+    return Math.max(prevEvenMax, prevOddMax);
+}
+
 function max_overlapping(arrIntervals)
 {
     var starts = arrIntervals.map(function(a){return a[0];}).sort(function(a,b){return a - b;});

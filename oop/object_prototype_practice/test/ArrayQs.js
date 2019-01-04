@@ -102,6 +102,36 @@ describe('Array Questions', function() {
 		});
 	});
 
+	describe('largestNonAdjacentSumAlt', function() {
+
+		it('in [] out 2', function() {
+			expect(largestNonAdjacentSumAlt([])).to.equal(0);
+		});
+
+		it('in [2] out 2', function() {
+			expect(largestNonAdjacentSumAlt([2])).to.equal(2);
+		});
+
+		it('in [2, 4] out 4', function() {
+			expect(largestNonAdjacentSumAlt([2, 4])).to.equal(4);
+		});
+
+		it('in [2, 4, 6, 2, 5] out 13', function() {
+			expect(largestNonAdjacentSumAlt([2, 4, 6, 2, 5])).to.equal(13);
+		});
+
+		it('in [5, 1, 1, 5] out 10', function() {
+			expect(largestNonAdjacentSumAlt([5, 1, 1, 5])).to.equal(10);
+		});
+
+		it('in [5, 1, 1, 5, 1] out 10', function() {
+			expect(largestNonAdjacentSumAlt([5, 1, 1, 5, 1])).to.equal(10);
+		});
+
+		it('in [5, 1, 5, 5, 1] out 11', function() {
+			expect(largestNonAdjacentSumAlt([5, 1, 5, 5, 1])).to.equal(11);
+		});
+	});
 
 	describe('max_overlapping', function() {
 
