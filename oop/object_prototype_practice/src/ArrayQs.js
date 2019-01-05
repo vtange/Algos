@@ -1,4 +1,4 @@
-function arrAdd2K(arrInts,k)
+function arrAddsToK(arrInts,k)
 {
     var table = {};
     var missing;

@@ -1,17 +1,17 @@
 describe('Array Questions', function() {
 
-	describe('arrAdd2K', function() {
+	describe('arrAddsToK', function() {
 
 		it('should be false for []', function() {
-			expect(arrAdd2K([],1)).to.equal(false);
+			expect(arrAddsToK([],1)).to.equal(false);
 		});
 
 		it('should be true for [7,3], 10', function() {
-			expect(arrAdd2K([7,3],10)).to.equal(true);
+			expect(arrAddsToK([7,3],10)).to.equal(true);
 		});
 
 		it('should be true for [10,15,3,7,3], 17', function() {
-			expect(arrAdd2K([10,15,3,7,3],17)).to.equal(true);
+			expect(arrAddsToK([10,15,3,7,3],17)).to.equal(true);
         });
 
 	});
