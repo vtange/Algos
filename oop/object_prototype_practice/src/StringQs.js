@@ -55,10 +55,24 @@ function shortestSubstringWLetters(string, stringOfLetters)
     //move pointer1 til we have only {a:2, c:1} again;
 }
 
-function largestSumContiguousArraySlice(arrayInts)
-{
+//Kadane's algorithm
+var maximumSubArray = function(array) {
+    var max_ending_here = 0;
+    var max_so_far = 0;
+    var startIdx = 0;
+    var endIdx = 0;
 
-}
+    for (var i = 0; i < array.length; i++)
+    {
+        max_ending_here = Math.max(0, max_ending_here + array[i]);
+        if(max_ending_here === 0) startIdx = i;
+        else endIdx = i;
+        max_so_far = Math.max(max_so_far, max_ending_here);
+    }
+    return {max:max_so_far, subarray: array.slice(startIdx,endIdx)};
+};
+
+maximumSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 
 function decode(string, tableCodes)
 {
@@ -95,4 +109,58 @@ function factorial (n) {
   if (f[n] > 0)
     return f[n];
   return f[n] = factorial(n-1) * n;
+}
+
+
+var dpArr = [
+    [undefined,undefined],
+    [undefined, undefined],
+    [undefined, undefined],
+    [undefined, undefined],
+    [undefined, undefined],
+    [undefined, undefined]
+];
+
+function knapsackDP(itemsNumber, capacity, weights, values) {
+
+    var finalResult;
+
+    //check to see if the result is already stored in the array. if it is return that instead
+    if(dpArr[itemsNumber][capacity] !== undefined) {
+        return dpArr[itemsNumber][capacity];
+    }
+
+    //define basecase. if capacity or number of items is zero, then final result is zero
+    if(itemsNumber === 0 || capacity === 0) {
+        finalResult = 0;
+    } else if(weights[itemsNumber] > capacity) {
+        finalResult = knapsackDP(itemsNumber - 1, capacity, weights, values);
+    } else {
+        var dontPutInKnapsack = knapsackDP(itemsNumber - 1, capacity, weights, values);
+        var putInSack = values[itemsNumber] + knapsackDP(itemsNumber - 1, capacity - weights[itemsNumber], weights, values);
+        finalResult = Math.max(dontPutInKnapsack, putInSack);
+    }
+
+    //save the result in the array
+    dpArr[itemsNumber][capacity] = finalResult;
+
+    //return the final result
+    return finalResult;
+}
+
+function improvedMathPow(a, b)
+{
+    if (b == 0)
+    {
+        return 1;
+    }
+    else if(b % 2 == 1)
+    {
+        return a * improvedMathPow(a, b - 1);
+    }
+    else
+    {
+        p = improvedMathPow(a, b / 2)
+        return p * p;
+    }
 }

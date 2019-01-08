@@ -216,3 +216,14 @@ function getRand(arr, num)
     }
     return returnVal;
 }
+
+function getAllPossibleSets(arr)
+{
+    var sets = [];
+    //[a,b,c]
+
+    //use binary
+    //000
+    //until 111, keep adding 1 to 000 and then call fn where it translates binary to a set, push to sets.
+    return sets;
+}
