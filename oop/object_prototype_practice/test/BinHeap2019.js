@@ -51,6 +51,13 @@ describe('Binary Heap', function() {
 			expect(tree._root.right.value).to.equal(200);
 			expect(tree._root.right.left.value).to.equal(122);
 		});
+
+		it('extract should be 1222, heap integrity intact', function() {
+			var a = tree.extractMax();
+			expect(a).to.equal(1222);
+			expect(tree._root.value).to.equal(200);
+			expect(tree.integrityCheck()).to.equal(true);
+		});
 	});
 
 	describe('Min Heap', function() {
@@ -87,6 +94,13 @@ describe('Binary Heap', function() {
 			tree.insert(200);
 			expect(tree._root.right.value).to.equal(12);
 			expect(tree._root.right.left.value).to.equal(200);
+		});
+
+		it('extract should be 1, heap integrity intact', function() {
+			var a = tree.extractMax();
+			expect(a).to.equal(1);
+			expect(tree._root.value).to.equal(6);
+			expect(tree.integrityCheck()).to.equal(true);
 		});
 	});
 

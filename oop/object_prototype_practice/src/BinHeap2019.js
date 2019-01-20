@@ -10,7 +10,7 @@ function BinaryHeap(value){
 
 BinaryHeap.prototype.insert = function(value)
 {
-    var ptrNode, ptrParent, tempValueHolder;
+    var ptrNode, ptrParent;
     if(!this._root)
     {
         this._root = new TreeNode(value, null, null);
@@ -42,17 +42,103 @@ BinaryHeap.prototype.insert = function(value)
     //bubble up
     while(ptrParent && this.comparator(ptrNode.value, ptrParent.value))
     {
-        tempValueHolder = ptrNode.value;
-        ptrNode.value = ptrParent.value;
-        ptrParent.value = tempValueHolder;
-        ptrParent = ptrParent.parent;
-        ptrNode = ptrNode.parent;
+        this.swap(ptrNode, ptrParent);
     }
 }
 
-BinaryHeap.prototype.remove = function(value)
+BinaryHeap.prototype.swap = function(ptrNode, ptrParent)
 {
-    var ptrNode, ptrParent, tempValueHolder;
+    var tempValueHolder = ptrNode.value;
+    ptrNode.value = ptrParent.value;
+    ptrParent.value = tempValueHolder;
+    ptrParent = ptrParent.parent;
+    ptrNode = ptrNode.parent;
+}
+
+BinaryHeap.prototype.extractMax = function()
+{
+    var ptrNode, extractedMax;
+
+    //if no root return null
+    if(!this._root)
+    {
+        return null;
+    }
+    else
+    {
+        extractedMax = this._root.value;
+    }
+
+    //remove max
+    //if root only just get the root since we don't have nextNewLeaf
+    if(!this._root.left && !this._root.right)
+    {
+        this._root = null;
+        return extractedMax;
+    }
+    else
+    {
+        //max is now this.nextNewLeaf.right or .left if right is null.
+        //remember to set nextnewleaf's children
+        this._root.value = this.nextNewLeaf.right ? this.nextNewLeaf.right.value : this.nextNewLeaf.left.value;
+        ptrNode = this._root;
+    }
+
+    //while ptrNode has children, compare children, swap with the largest value.
+    while(ptrNode.left != null || ptrNode.right != null)
+    {
+        if(!ptrNode.right)
+        {
+            //left only
+            if(this.comparator(ptrNode.left.value, ptrNode.value))
+            {
+                this.swap(ptrNode.left, ptrNode);
+            }
+            ptrNode = ptrNode.left;
+        }
+        else
+        {
+            //both
+            if(this.comparator(ptrNode.right.value, ptrNode.left.value))
+            {
+                //go with right
+                this.swap(ptrNode.right, ptrNode);
+                ptrNode = ptrNode.right;
+            }
+            else
+            {
+                //go with left
+                this.swap(ptrNode.left, ptrNode);
+                ptrNode = ptrNode.left;
+            }
+        }
+        //!ptrNode.left is impossible given how we set things
+    }
+    return extractedMax;
+}
+
+BinaryHeap.prototype.integrityCheck = function()
+{
+    //checks if binary heap is still a heap
+    return this.bfs(function(node)
+    {
+        if(node.left && node.right)
+        {
+            return this.comparator(node, node.left) && this.comparator(node, node.right);
+        }
+        else if(node.right)
+        {
+            return true; //we shouldn't ever have a node with only a right child
+        }
+        else if(node.left)
+        {
+            return this.comparator(node, node.left);
+        }
+        else
+        {
+            return false;
+        }
+    }.bind(this)) == undefined;
 }
 
 //basic bfs that goes down a tree level-by-level like a step-pyramid using a queue

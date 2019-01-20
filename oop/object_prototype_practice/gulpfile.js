@@ -9,6 +9,11 @@ gulp.task('default', function () {
 	browserSync.init({
         server: {
             baseDir: "./"
+        },
+        middleware: function (req, res, next) {
+            res.setHeader("Content-Security-Policy", "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self'; frame-ancestors 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; object-src 'self'; script-src 'self'; style-src 'self'");
+            res.setHeader("X-Content-Security-Policy", "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self'; frame-ancestors 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; object-src 'self'; script-src 'self'; style-src 'self'");
+            next();
         }
     });
     gulp.watch("src/*.js", ['sync']);
