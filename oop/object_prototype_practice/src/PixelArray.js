@@ -19,7 +19,7 @@ var arr2 = [
 PixelArray.prototype.getFields = function()
 {
     /*
-        ASSUMES ALL COLORS (#s) have one area, so this would fail with the 1s in the above example cause it returns 9 for 1.
+        ASSUMES ALL COLORS (#s) have one area, so this would fail with the 1s in the above example cause it returns 8 for 1.
     */
     var seen = Object.create(null);
     var returnVal = Object.create(null);
@@ -46,10 +46,10 @@ PixelArray.prototype.getNeighbors = function(x, y)
     y = parseInt(y,10);
     if(Array.isArray(this.body) && Array.isArray(this.body[y]))
     {
-        if(this.body[y-1] && this.body[y-1][x]) returnVal[x+","+(y-1)] = this.body[y-1][x];
-        if(this.body[y+1] && this.body[y+1][x]) returnVal[x+","+(y+1)] = this.body[y+1][x];
-        if(this.body[y][x-1]) returnVal[(x-1)+","+y] = this.body[y][x-1];
-        if(this.body[y][x+1]) returnVal[(x+1)+","+y] = this.body[y][x+1];
+        if(this.body[y-1] != undefined && this.body[y-1][x] != undefined) returnVal[x+","+(y-1)] = this.body[y-1][x];
+        if(this.body[y+1] != undefined && this.body[y+1][x] != undefined) returnVal[x+","+(y+1)] = this.body[y+1][x];
+        if(this.body[y][x-1] != undefined) returnVal[(x-1)+","+y] = this.body[y][x-1];
+        if(this.body[y][x+1] != undefined) returnVal[(x+1)+","+y] = this.body[y][x+1];
     }
     return returnVal;
 }
@@ -57,15 +57,9 @@ PixelArray.prototype.getNeighbors = function(x, y)
 //floodfill
 PixelArray.prototype.getFieldsDFS = function()
 {
-    /*
-        ASSUMES ALL COLORS (#s) have one area, so this would fail with the 1s in the above example cause it returns 9 for 1.
-    */
     var seen = Object.create(null);
     var remaining = Object.create(null);
     var currentColorQueue = [];
-    /*
-
-    */
     var returnVal = Object.create(null);
     var count = 0;
 
@@ -129,9 +123,99 @@ PixelArray.prototype.getFieldsDFS = function()
     return returnVal;
 }
 
+
+var islands1 = [
+    [1,1,1,1,1,0],
+    [1,1,1,0,1,0],
+    [1,1,1,0,0,0],
+    [1,0,0,0,0,0]
+]
+
+var islands2 = [
+    [1,1,1,0,1,0],
+    [1,1,1,0,1,0],
+    [0,1,1,0,0,0],
+    [1,0,0,0,0,0]
+]
+//get #times we run out of currentColorQueue
+PixelArray.prototype.getNumIslands = function()
+{
+    /*
+        ASSUMES ALL COLORS (#s) have one area, so this would fail with the 1s in the above example cause it returns 9 for 1.
+    */
+   var seen = Object.create(null);
+   var remaining = Object.create(null);
+   var currentColorQueue = [];
+   /*
+
+   */
+   //var returnVal = Object.create(null);
+   //var count = 0;
+   var islands = 0;
+
+   var neighbors, current, currentColor;
+   remaining["0,0"] = true;
+   while(currentColorQueue.length || Object.keys(remaining).length)
+   {
+       //get pixel
+       if(currentColorQueue.length)
+       {
+           current = currentColorQueue.shift().split(",");
+       }
+       else
+       {
+           if(currentColor == 1)
+           {
+                islands += 1;
+           }
+           //count = 0;
+           current = Object.keys(remaining).shift();
+           delete remaining[current];
+           current = current.split(",");
+       }
+       currentColor = this.body[current[1]][current[0]];
+
+       //set seen to true, add to returnVal
+       seen[current.toString()] = true;
+       //count += 1;
+       console.log(currentColor, islands, current.toString());
+
+       //get neighbors
+       neighbors = this.getNeighbors(current[0], current[1]);
+
+       for(var prop in neighbors)
+       {
+           if(seen[prop]) continue;
+           //same color
+           if(neighbors[prop] == currentColor)
+           {
+               if(!seen[prop])
+               {
+                   if(remaining[prop]) delete remaining[prop];
+                   currentColorQueue.push(prop);
+                   seen[prop] = true;
+               }
+           }
+           //diff color
+           else if(!remaining[prop])
+           {
+               remaining[prop] = true;
+           }
+       }
+   }
+   //record last island
+   if(currentColor == 1)
+   {
+        islands += 1;
+   }
+
+   return islands;
+}
+
+
 //get pixels whose body doesn't reach border
 //{3: [1, 4]}
-PixelArray.prototype.getIslands = function()
+PixelArray.prototype.surroundedRegions = function()
 {
 
 }
