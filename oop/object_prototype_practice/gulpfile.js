@@ -11,8 +11,8 @@ gulp.task('default', function () {
             baseDir: "./"
         },
         middleware: function (req, res, next) {
-            res.setHeader("Content-Security-Policy", "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self'; frame-ancestors 'self'; frame-src 'self'; img-src 'self' 'unsafe-inline'; manifest-src 'self'; media-src 'self'; object-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'");
-            res.setHeader("X-Content-Security-Policy", "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self'; frame-ancestors 'self'; frame-src 'self'; img-src 'self' 'unsafe-inline'; manifest-src 'self'; media-src 'self'; object-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'");
+            res.setHeader("Content-Security-Policy", "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self'; frame-ancestors 'self'; frame-src 'self'; img-src 'self' data:; manifest-src 'self'; media-src 'self'; object-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'");
+            res.setHeader("X-Content-Security-Policy", "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self'; frame-ancestors 'self'; frame-src 'self'; img-src 'self' data:; manifest-src 'self'; media-src 'self'; object-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'");
             next();
         }
     });
