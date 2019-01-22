@@ -6,7 +6,14 @@ var arr = [
     [1,1,1,2,2,2],
     [1,1,1,2,3,2],
     [4,4,4,2,2,2],
-    [1,1,1,2,2,2]
+    [1,4,1,2,3,2]
+]
+
+var arr2 = [
+    [1,2,3,4,5,6],
+    [7,8,9,10,11,12],
+    [13,14,15,16,17,18],
+    [19,20,21,22,23,24]
 ]
 
 PixelArray.prototype.getFields = function()
@@ -96,18 +103,27 @@ PixelArray.prototype.getFieldsDFS = function()
         for(var prop in neighbors)
         {
             if(seen[prop]) continue;
-            //if same color put coord in currentColorQueue
-            if(neighbors[prop] == currentColor && !seen[prop])
+            //same color
+            if(neighbors[prop] == currentColor)
             {
-                currentColorQueue.push(prop);
-                seen[prop] = true;
+                if(!seen[prop])
+                {
+                    if(remaining[prop]) delete remaining[prop];
+                    currentColorQueue.push(prop);
+                    seen[prop] = true;
+                }
             }
+            //diff color
             else if(!remaining[prop])
             {
-                //else put in remaining
                 remaining[prop] = true;
             }
         }
+    }
+    //record last area
+    if(currentColor && (!returnVal[currentColor] || count > returnVal[currentColor]))
+    {
+        returnVal[currentColor] = count;
     }
 
     return returnVal;
