@@ -212,10 +212,82 @@ PixelArray.prototype.getNumIslands = function()
    return islands;
 }
 
+var islands3 = [
+    [1,0,0,0,0,0],
+    [1,0,1,1,1,0],
+    [1,1,0,0,1,0],
+    [0,1,0,0,0,0]
+]
+
+var islands4 = [
+    [0,0,1,0,0,0],
+    [1,0,1,0,1,0],
+    [0,0,1,0,1,0],
+    [1,0,0,0,0,0]
+]
 
 //get pixels whose body doesn't reach border
-//{3: [1, 4]}
 PixelArray.prototype.surroundedRegions = function()
 {
 
+    var noConnectionToBorder = [];
+    var seen = Object.create(null);
+    var neighbors, currentCoord;
+    var currLand = [], currLandRemaining = [];
+    var metBorder = false;
+    var arrSplitCoords = [];
+
+    //we only need the interior
+    for(var y = 1; y < this.body.length-2; y++)
+    {
+        for(var x = 1; x < this.body[y].length-2; x++)
+        {
+            currentCoord = x+","+y;
+
+            //found land. if !seen begin dfs
+            if(this.body[y][x] == 1 && !seen[currentCoord])
+            {
+                seen[currentCoord] = true;
+                currLandRemaining.push(currentCoord);
+                while(currLandRemaining.length)
+                {
+                    currentCoord = currLandRemaining.shift();
+                    currLand.push(currentCoord);
+                    neighbors = this.getNeighbors(x,y);
+                    for(var coords in neighbors)
+                    {
+                        if(neighbors[coords] == 1)
+                        {
+                            arrSplitCoords = coords.split(",");
+                            if(this.isBorder(arrSplitCoords))
+                            {
+                                metBorder = true;
+                            }
+                            if(!seen[coords])
+                            {
+                                currLandRemaining.push(coords);
+                                seen[coords] = true;
+                            }
+                        }
+                    }
+                }
+                if(!metBorder)
+                {
+                    noConnectionToBorder.push(currLand);
+                }
+                metBorder = false;
+                currLand = [];
+            }
+            else
+            {
+                seen[currentCoord] = true;
+            }
+        }
+    }
+    return noConnectionToBorder;
+}
+
+PixelArray.prototype.isBorder = function(arrCoords)
+{
+    return arrCoords[0] == 0 || arrCoords[0] == this.body[0].length-1 || arrCoords[1] == 0 || arrCoords[1] == this.body.length-1;
 }
