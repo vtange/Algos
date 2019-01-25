@@ -229,7 +229,7 @@ var islands4 = [
 //get pixels whose body doesn't reach border
 PixelArray.prototype.surroundedRegions = function()
 {
-
+    var thisBody = this.body;
     var noConnectionToBorder = [];
     var seen = Object.create(null);
     var neighbors, currentCoord;
@@ -238,53 +238,58 @@ PixelArray.prototype.surroundedRegions = function()
     var arrSplitCoords = [];
 
     //we only need the interior
-    for(var y = 1; y < this.body.length-2; y++)
+    for(var y = 1; y < thisBody.length-2; y++)
     {
-        for(var x = 1; x < this.body[y].length-2; x++)
+        for(var x = 1; x < thisBody[y].length-2; x++)
         {
             currentCoord = x+","+y;
-
+            console.log(currentCoord);
             //found land. if !seen begin dfs
-            if(this.body[y][x] == 1 && !seen[currentCoord])
+            if(!seen[currentCoord])
             {
                 seen[currentCoord] = true;
-                currLandRemaining.push(currentCoord);
-                while(currLandRemaining.length)
+                if(thisBody[y][x] == 1)
                 {
-                    currentCoord = currLandRemaining.shift();
-                    currLand.push(currentCoord);
-                    neighbors = this.getNeighbors(x,y);
-                    for(var coords in neighbors)
+                    currLandRemaining.push(currentCoord);
+                    while(currLandRemaining.length)
                     {
-                        if(neighbors[coords] == 1)
+                        currentCoord = currLandRemaining.shift().split(",");
+                        console.log(currentCoord);
+                        currLand.push(currentCoord);
+                        neighbors = this.getNeighbors(currentCoord[0],currentCoord[1]);
+                        for(var coords in neighbors)
                         {
-                            arrSplitCoords = coords.split(",");
-                            if(this.isBorder(arrSplitCoords))
+                            if(neighbors[coords] == 1)
                             {
-                                metBorder = true;
-                            }
-                            if(!seen[coords])
-                            {
-                                currLandRemaining.push(coords);
-                                seen[coords] = true;
+                                arrSplitCoords = coords.split(",");
+                                if(this.isBorder(arrSplitCoords))
+                                {
+                                    metBorder = true;
+                                }
+                                if(!seen[coords])
+                                {
+                                    currLandRemaining.push(coords);
+                                    seen[coords] = true;
+                                }
                             }
                         }
                     }
+                    if(!metBorder)
+                    {
+                        noConnectionToBorder.push(currLand);
+                    }
+                    metBorder = false;
+                    currLand = [];
                 }
-                if(!metBorder)
-                {
-                    noConnectionToBorder.push(currLand);
-                }
-                metBorder = false;
-                currLand = [];
-            }
-            else
-            {
-                seen[currentCoord] = true;
             }
         }
     }
-    return noConnectionToBorder;
+    noConnectionToBorder.forEach(function(islandCoords){
+        islandCoords.forEach(function(arrCoords){
+            thisBody[arrCoords[1]][arrCoords[0]] = 0;
+        });
+    })
+    return thisBody;
 }
 
 PixelArray.prototype.isBorder = function(arrCoords)
