@@ -24,7 +24,7 @@ Sorter.prototype.merge = function(arr1, arr2)
     var left_idx = 0, right_idx = 0;
 
     //main sorting part
-    while (left_idx < arr1.length && right_idx < arr2.length)
+    while (arr1[left_idx] != undefined && arr2[right_idx] != undefined)
     {
         // change the direction of this comparison to change the direction of the sort
         if(arr1[left_idx] <= arr2[right_idx])
