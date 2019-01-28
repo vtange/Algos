@@ -124,6 +124,55 @@ PixelArray.prototype.getFieldsDFS = function()
 }
 
 
+//floodfill (wont work w/o still using remaining table for efficient prevention of redundant neighbors)
+/*
+PixelArray.prototype.getFieldsDFS2 = function()
+{
+    var seen = Object.create(null), remaining = Object.create(null);
+    var returnVal = Object.create(null);
+    var queue = [];
+    var count = 0;
+    var current = null, currentColor = null;
+
+    queue.push([0,0]);
+    while(queue.length)
+    {
+        //get pixel
+        current = queue.shift();
+        if(currentColor)
+        {
+
+        }
+        currentColor = this.body[current[1], current[0]]
+
+        //get neighbors
+        neighbors = this.getNeighbors(current[0], current[1]);
+
+        for(var prop in neighbors)
+        {
+            //each pixel gets one run
+            if(seen[prop]) continue;
+            seen[prop] = true;
+
+            //same color, unshift in queue (it will be prioritized during [current = queue.shift();])
+            if(neighbors[prop] == currentColor)
+            {
+                if(!seen[prop])
+                {
+                    if(remaining[prop]) delete remaining[prop];
+                    queue.unshift(prop);
+                }
+            }
+            //diff color, push to queue (last to go);
+            else if(!remaining[prop])
+            {
+                remaining[prop] = true;
+            }
+        }
+    }
+    return returnVal;
+}*/
+
 var islands1 = [
     [1,1,1,1,1,0],
     [1,1,1,0,1,0],
