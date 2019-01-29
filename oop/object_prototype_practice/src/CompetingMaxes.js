@@ -58,4 +58,26 @@ var maximumSubArray = function(array) {
 maximumSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 
 
-//Binary Tree Maximum Path Sum also here
+//Binary Tree Maximum Path Sum
+/**
+ * @param root: The root of binary tree.
+ * @return: An integer.
+ */
+function maxPathSum(root) {
+    return maxPath(root);
+}
+
+function maxPath(root) {
+    if (root == null) return 0;
+    var max = 0;
+    var left = maxPath(root.left);
+    var right = maxPath(root.right);
+    max = Math.max(max, left + right + root.val);
+    max = Math.max(max, root.val);
+    return Math.max(left, right) + root.val;
+}
+
+var testBinaryMaxPathSumTree = new BinaryHeap();
+testBinaryMaxPathSumTree.insert(1);
+testBinaryMaxPathSumTree.insert(2);
+testBinaryMaxPathSumTree.insert(3);
