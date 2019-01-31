@@ -3,7 +3,22 @@
 
 //oftimes you have recursion and have to cache past results
 
-
+var fcache = Object.create(null);
+function fibonacci(n){
+    if(n === undefined) return null;
+    if(!fcache[n])
+    {
+        if(n<2)
+        {
+            fcache[n] = n;
+        }
+        else
+        {
+            fcache[n] = fibonacci(n-1) + fibonacci(n-2);
+        }
+    }
+    return fcache[n];
+}
 
 
 function decode(string, tableCodes)
@@ -15,17 +30,27 @@ function decode(string, tableCodes)
 // Returns count of possible paths to reach cell at row
 // number m and column number n from the topmost leftmost
 // cell (cell at 1, 1)
+var pcache = Object.create(null);
 function numberOfPaths(m, n)
 {
+    if(m === undefined || n === undefined) return null;
+    var key = m+","+n;
     // If either given row number is first or given column
     // number is first
-    if (m == 1 || n == 1)
-            return 1;
-
-    // If diagonal movements are allowed then the last
-    // addition is required.
-    return numberOfPaths(m-1, n) + numberOfPaths(m, n-1);
-        // + numberOfPaths(m-1,n-1);
+    if(!pcache[key])
+    {
+        if (m == 1 || n == 1)
+        {
+            pcache[key] = 1;
+        }
+        else
+        {
+            // If diagonal movements are allowed then the last
+            // addition is required.
+            pcache[key] = numberOfPaths(m-1, n) + numberOfPaths(m, n-1); // + numberOfPaths(m-1,n-1);
+        }
+    }
+    return pcache[key];
 }
 
 function numberOfPathsMath(m, n)
@@ -35,14 +60,27 @@ function numberOfPathsMath(m, n)
 
 //needed for ^
 var f = [];
-function factorial (n) {
-  if (n == 0 || n == 1)
-    return 1;
-  if (f[n] > 0)
+function factorialRcrs(n) {
+    if (n == 0 || n == 1)
+    {
+        return 1;
+    }
+    if(!f[n])
+    {
+        f[n] = factorialRcrs(n-1) * n;
+    }
     return f[n];
-  return f[n] = factorial(n-1) * n;
 }
 
+function factorial(number) {
+    let result = 1;
+
+    for (let i = 2; i <= number; i += 1) {
+      result *= i;
+    }
+
+    return result;
+  }
 
 var dpArr = [
     [undefined,undefined],
