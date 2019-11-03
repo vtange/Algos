@@ -36,7 +36,7 @@ describe('Binary Heap', function() {
 			heap.add(3);
 			expect(heap.root.value).to.equal(3);
 		});
-		
+
 		it('root should still be 3 if I add 4', function() {
 			heap.add(3);
 			heap.add(4);

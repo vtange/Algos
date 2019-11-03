@@ -82,6 +82,22 @@ function factorial(number) {
     return result;
   }
 
+
+function longestCommonSubsequence(string1, string2)
+{
+    /*
+    create 2d array
+            string2
+  s       A B T G A T
+  t  ---------------------
+  r A |   A A A A A A
+  i B |   _ AB --------->
+  n G |   _ _ _ ABG----->
+  g T |   _ _ T T T ABGT
+  1  */
+}
+
+
 var dpArr = [
     [undefined,undefined],
     [undefined, undefined],

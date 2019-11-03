@@ -85,7 +85,6 @@ PixelArray.prototype.getFieldsDFS = function()
         }
         currentColor = this.body[current[1]][current[0]];
 
-
         //set seen to true, add to returnVal
         seen[current.toString()] = true;
         count += 1;
@@ -100,12 +99,9 @@ PixelArray.prototype.getFieldsDFS = function()
             //same color
             if(neighbors[prop] == currentColor)
             {
-                if(!seen[prop])
-                {
-                    if(remaining[prop]) delete remaining[prop];
-                    currentColorQueue.push(prop);
-                    seen[prop] = true;
-                }
+                if(remaining[prop]) delete remaining[prop];
+                currentColorQueue.push(prop);
+                seen[prop] = true;
             }
             //diff color
             else if(!remaining[prop])
