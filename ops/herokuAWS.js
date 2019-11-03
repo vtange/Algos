@@ -22,17 +22,20 @@ ex. heroku apps:rename <new name>
 heroku apps:______________
 	:rename <new name>
 	:destroy --app
-	
-	
+
+
 heroku logs
 	show logs for debug
 
+heroku logs --tail
+	show logs for debug, realtime
+	ctrl+c to get out
 
 /*--------------*/
 /*  HOW TO AWS (EB)  */
 /*--------------*/
 /*
- 
+
 eb list
  	list eb environments related to project
 
@@ -43,7 +46,7 @@ eb create
 	create a new environment for project
 
 eb deploy
-	
+
 eb logs
- 
+
 */
