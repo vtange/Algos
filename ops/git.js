@@ -5,28 +5,34 @@
 
 git clone (https://github.com/:user/:repo)
 	downloads repo to current folder
-	
+
 git add --a (all)
 	add all files to be committed as seen from current directory
-	
+
 git commit -m (message)
 	commit with message
-	
+
 git commit -am (all and message)
 	do add and commit all at once (NOT RECOMMENDED)
 
 git checkout
 	go to branch
-	
+
 git checkout -b (branch)
 	new branch
-	
+
 git pull (upstream or origin or heroku) (branch name)
 	download from remote
 
-git push 
+// To make a private forked repo.
+// 1. Rename the repo name at the github website.
+// 2. Create a new repo. use the same name as original repo you forked from
+// 3. Go to the folder of the fork.
+// 4. git push --mirror https://github.com/exampleuser/new-repository.git <-- ssh url of repo you made in step 2.
+
+git push
 	upload to remote, overwrites all files up the most recent commit
-	
+
 git set-url (origin) (new_url)
 	changes url of remotes
 
