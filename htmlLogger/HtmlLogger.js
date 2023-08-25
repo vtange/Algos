@@ -11,7 +11,6 @@ function HtmlLogger() {
     div.style.overflow = "visible";
     div.style.width = "calc(100vw - 40px)";
     div.style.maxWidth = "360px";
-    div.style.minWidth = "250px";
     div.style.color = "white";
     div.style.zIndex = 999;
     div.style.fontFamily = "monospace, Arial, sans-serif";
@@ -27,7 +26,9 @@ function HtmlLogger() {
 
     var list = document.createElement("ul");
     list.style.overflowY = "scroll";
+    list.style.position = "absolute";
     list.style.height = "100%";
+    list.style.width = "calc(100% - 30px)";
     list.style.paddingInlineStart = "30px";
     div.appendChild(list);
     this.list = list;
